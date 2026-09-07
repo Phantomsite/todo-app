@@ -4,17 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <style>
-      li {
-        display: flex;
-      }
-    </style>
-
+    <link rel="stylesheet" href="stylesheet.css" />
     <script src="index.js" defer></script>
   </head>
   <body>
-    <button class="create_task">Lav en task</button>
-    <input type="text" class="task_text" />
+    <h1>Skriv din todo liste her</h1>
+    <input type="text" class="task-text" id="todoInputForm" />
+    <button class="create-task">Tilføj</button>
     <ul class="tasks"></ul>
+    <h2>Færdige opgaver</h2>
+    <ul class="tasks-complete"></ul>
   </body>
 </html>

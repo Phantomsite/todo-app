@@ -1,0 +1,20 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Libre Franklin", sans-serif;
+  line-height: 1.5;
+}
+
+body {
+  background-color: rgb(110, 110, 110);
+}
+
+p,
+button,
+input {
+  font-size: 1.5rem;
+}
+
+li {
+  display: flex;
+}

@@ -1,49 +1,80 @@
-"use strict";
+const taskInput = document.querySelector(".task-text");
+const btnCreateTask = document.querySelector(".create-task");
+const taskList = document.querySelector(".tasks");
+const taskListDone = document.querySelector(".tasks-complete");
+const taskArray = [];
 
-// <button class="create_task"></button>
-// <input type="text" class="task_text" />
-// <ul class="tasks"></ul>
-const task_input = document.querySelector(".task_text");
-const createTask_btn = document.querySelector(".create_task");
-const ul_elm = document.querySelector(".tasks");
-const task_arr = [];
-createTask_btn.addEventListener("click", createTask);
+// Eventlister der starter funktion så input tekst kommer i liste
+btnCreateTask.addEventListener("click", createTask);
 
+// Gør at funktionen "createTask" også virker når man klikker på "Enter" i keyboard
+taskInput.addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+    createTask();
+  }
+});
+
+// Laver input til object i "Taskarray" og sender videre til function renderlist
 function createTask() {
-  console.log("HEJ VERDEN!");
+  console.log("creating task");
 
-  const task_obj = { taskTxt: task_input.value, taskDone: false, id: self.crypto.randomUUID() };
-  //console.log("task_obj", task_obj);
-  task_arr.push(task_obj);
-  console.log("task_arr", task_arr);
-  renderList();
+  const taskObj = {
+    taskTxt: taskInput.value,
+    taskDone: false,
+    id: self.crypto.randomUUID(),
+  };
+
+  if (taskInput.value === "") {
+    alert("You must write something!");
+  } else {
+    taskArray.push(taskObj);
+    console.log("taskArray", taskArray);
+    renderList();
+  }
 }
 
+// Laver array til punkter i ul liste "tasks"
 function renderList() {
-  // vi tømmer ul listen
-  ul_elm.innerHTML = "";
-  // vi looper igennem vores model (MVC) som er arrayet med vores tasks
-  task_arr.forEach((task) => {
-    // vi laver et li element
+  taskList.innerHTML = ""; // tømmer ul listen
+
+  // looper  model (MVC) som er arrayet med tasks
+  taskArray.forEach((task) => {
     const li = document.createElement("li");
-    // vi adder noget HTML til vores li element
-    // task.taskDone ? "checked" : ""  - hvis tasken er done i vores object
-    // bliver "checked" sat i vore checkbox og den fremstår checked, hvis den ikke er done,
-    // vil der bare være en tom streng og check boksen fremstår unchecked
-    // (vi sætter også teksten ind)
     li.innerHTML = `<input type="checkbox" ${task.taskDone ? "checked" : ""}/><p>${task.taskTxt} </p>`;
-    // querySelector til checkboxen vi har puttet ind i li ovenfor
     const checkBox = li.querySelector('[type = "checkbox"]');
-    // eventlistener på checkboksen
+    //Updater og husker om "tasks" er afkryset eller ej
+
     checkBox.addEventListener("click", (e) => {
-      // behøver ikke at være der men er der for at vise en pointe
       e.preventDefault();
-      // sæt tasken til det modatte af hvad den er, hvis den er true bliver den false og omvendt
       task.taskDone = !task.taskDone;
-      // skriv listen ud igen: checkboksen er opdateret, prøv at udkommentere renderList() og klik på checkboksen?
-      // - det er MVC vi: opdaterer modellen, i vores tilfælde arrayet, og så beder vi render om at afspejle dataen i modellen
+
+      if (task.taskDone === true) {
+        taskListDone.appendChild(li);
+
+        console.log("task complete");
+      } else {
+        console.log("task not complete");
+      }
+
       renderList();
+      console.log(task.taskDone);
     });
-    ul_elm.appendChild(li);
+    taskList.appendChild(li);
+
+    taskInput.value = ""; //Sletter inputfelt tekst
   });
 }
+
+function checkingCheckBox() {
+  if (task.taskDone === true) {
+    console.log("task complete");
+  } else {
+    console.log("task not complete");
+  }
+}
+
+//Idk
+// <button class="create-task"></button>
+// <input type="text" class="task-text" />
+// <ul class="tasks"></ul>
+
