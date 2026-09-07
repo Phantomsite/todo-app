@@ -24,6 +24,7 @@ function createTask() {
     id: self.crypto.randomUUID(),
   };
 
+  //if statement stopper hvis der ikke er noget i inputfelt
   if (taskInput.value === "") {
     alert("You must write something!");
   } else {
@@ -40,37 +41,41 @@ function renderList() {
   // looper  model (MVC) som er arrayet med tasks
   taskArray.forEach((task) => {
     const li = document.createElement("li");
-    li.innerHTML = `<input type="checkbox" ${task.taskDone ? "checked" : ""}/><p>${task.taskTxt} </p>`;
-    const checkBox = li.querySelector('[type = "checkbox"]');
-    //Updater og husker om "tasks" er afkryset eller ej
+    li.innerHTML =
+      `<input type="checkbox" ${task.taskDone ? "checked" : ""}/><p>${task.taskTxt} </p>` +
+      `<button class="tester"/> <p>${"X"} </p>`;
 
+    const deleteBtn = li.querySelector("button");
+
+    //function for at slette "tasks"
+    deleteBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      let deletionNumber = taskArray.indexOf(task);
+      console.log(deletionNumber);
+      taskArray.splice(deletionNumber, 1);
+      renderList();
+    });
+
+    const checkBox = li.querySelector('[type = "checkbox"]');
+
+    //function for checkbox
     checkBox.addEventListener("click", (e) => {
       e.preventDefault();
       task.taskDone = !task.taskDone;
-
-      if (task.taskDone === true) {
-        taskListDone.appendChild(li);
-
-        console.log("task complete");
-      } else {
-        console.log("task not complete");
-      }
-
+      taskListDone.innerHTML = "";
       renderList();
       console.log(task.taskDone);
     });
-    taskList.appendChild(li);
+
+    //Tasks blilver sorteret i "taskList" og "taskListDone"
+    if (task.taskDone === true) {
+      taskListDone.appendChild(li);
+    } else {
+      taskList.appendChild(li);
+    }
 
     taskInput.value = ""; //Sletter inputfelt tekst
   });
-}
-
-function checkingCheckBox() {
-  if (task.taskDone === true) {
-    console.log("task complete");
-  } else {
-    console.log("task not complete");
-  }
 }
 
 //Idk
