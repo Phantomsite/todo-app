@@ -6,13 +6,34 @@
     <title>Document</title>
     <link rel="stylesheet" href="stylesheet.css" />
     <script src="index.js" defer></script>
+    <script
+      type="module"
+      src="outdoor pakke/open_meteo/weather_open_meteo.js"
+      defer
+    ></script>
+    <script
+      type="module"
+      src="outdoor pakke/utils_lib/utils_lib.js"
+      defer
+    ></script>
   </head>
   <body>
-    <h1>Skriv din todo liste her</h1>
-    <input type="text" class="task-text" id="todoInputForm" />
-    <button class="create-task">Tilføj</button>
+    <h1>Todo list</h1>
+    <input
+      type="text"
+      class="task-text"
+      id="todoInputForm"
+      placeholder="Task name"
+    />
+    <h3>Date</h3>
+    <select name="date" id="datePicker"></select>
+    <h3>Month</h3>
+    <select name="month" id="datePickerMonth"></select>
+    <h3>Outdoors?</h3>
+    <input type="checkbox" id="outdoorCheecker" />
+    <button class="create-task">Add task</button>
     <ul class="tasks"></ul>
-    <h2>Færdige opgaver</h2>
+    <h2>Finished tasks</h2>
     <ul class="tasks-complete"></ul>
   </body>
 </html>

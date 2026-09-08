@@ -18,3 +18,8 @@ input {
 li {
   display: flex;
 }
+
+.tester {
+  font-style: italic;
+  color: rgb(221, 140, 140);
+}

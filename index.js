@@ -2,19 +2,32 @@ const taskInput = document.querySelector(".task-text");
 const btnCreateTask = document.querySelector(".create-task");
 const taskList = document.querySelector(".tasks");
 const taskListDone = document.querySelector(".tasks-complete");
+const outdoorTask = document.getElementById("outdoorCheecker");
 const taskArray = [];
+let outdoorValue = "inside activity";
 
-// Eventlister der starter funktion så input tekst kommer i liste
+//updates if task is outside
+outdoorTask.addEventListener("click", function () {
+  if (outdoorValue === "inside activity") {
+    outdoorValue = "outside activity";
+  } else {
+    outdoorValue = "inside activity";
+  }
+  console.log(outdoorValue);
+  return outdoorValue;
+});
+
+// starts function to add input text to todo list
 btnCreateTask.addEventListener("click", createTask);
 
-// Gør at funktionen "createTask" også virker når man klikker på "Enter" i keyboard
+//"createTask" can also start by pressing the enter key
 taskInput.addEventListener("keypress", function (event) {
   if (event.key === "Enter") {
     createTask();
   }
 });
 
-// Laver input til object i "Taskarray" og sender videre til function renderlist
+//input becomes object in "Taskarray" and calls function "renderList"
 function createTask() {
   console.log("creating task");
 
@@ -22,11 +35,12 @@ function createTask() {
     taskTxt: taskInput.value,
     taskDone: false,
     id: self.crypto.randomUUID(),
+    outdoor: outdoorValue,
   };
 
-  //if statement stopper hvis der ikke er noget i inputfelt
+  //cancels function if nothing has been written in input
   if (taskInput.value === "") {
-    alert("You must write something!");
+    alert("You must write something");
   } else {
     taskArray.push(taskObj);
     console.log("taskArray", taskArray);
@@ -34,20 +48,20 @@ function createTask() {
   }
 }
 
-// Laver array til punkter i ul liste "tasks"
+//each element in arrray becomes li in ul
 function renderList() {
-  taskList.innerHTML = ""; // tømmer ul listen
+  taskList.innerHTML = ""; // empties ul
 
-  // looper  model (MVC) som er arrayet med tasks
   taskArray.forEach((task) => {
     const li = document.createElement("li");
     li.innerHTML =
-      `<input type="checkbox" ${task.taskDone ? "checked" : ""}/><p>${task.taskTxt} </p>` +
-      `<button class="tester"/> <p>${"X"} </p>`;
+      `<input type="checkbox" ${task.taskDone ? "checked" : ""}/><p>${task.taskTxt}  </p>` +
+      `<p class="tester"> ${" \xa0(" + task.outdoor + ")"} </p>` +
+      `<button class="delete-btn-styles"/> <p>${"X"} </p>`;
 
     const deleteBtn = li.querySelector("button");
 
-    //function for at slette "tasks"
+    //deletes "tasks"
     deleteBtn.addEventListener("click", (e) => {
       e.preventDefault();
       let deletionNumber = taskArray.indexOf(task);
@@ -57,8 +71,9 @@ function renderList() {
     });
 
     const checkBox = li.querySelector('[type = "checkbox"]');
+    const testing = li.querySelector("p.tester");
 
-    //function for checkbox
+    //updates when task is checked "done"
     checkBox.addEventListener("click", (e) => {
       e.preventDefault();
       task.taskDone = !task.taskDone;
@@ -67,14 +82,24 @@ function renderList() {
       console.log(task.taskDone);
     });
 
-    //Tasks blilver sorteret i "taskList" og "taskListDone"
+    //Checks if task is "outside"
+    if (task.outdoor === "outside activity") {
+      testing.classList.add("outside");
+    } else {
+      console.log("inside task");
+    }
+
+    //Tasks gets sorted into "taskList" and "taskListDone"
     if (task.taskDone === true) {
       taskListDone.appendChild(li);
     } else {
       taskList.appendChild(li);
     }
 
-    taskInput.value = ""; //Sletter inputfelt tekst
+    //resets input elements
+    taskInput.value = "";
+    outdoorTask.checked = false;
+    outdoorValue = "inside activity";
   });
 }
 

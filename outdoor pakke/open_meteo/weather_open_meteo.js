@@ -6,7 +6,9 @@ loadJSON(
 
 function dataLoaded(data) {
   console.log("DATA", data);
-  console.log(`WEATHER KODE for dagen: ${Date(data.daily.time)} VMO kode: ${data.daily.weathercode[0]}`);
+  console.log(
+    `WEATHER CODE for today: ${Date(data.daily.time)} VMO kode: ${data.daily.weathercode[0]}`,
+  );
 }
 
 const wwCodes = {
@@ -38,3 +40,4 @@ const wwCodes = {
   86: "heavysnowshowers_day.png",
   95: "rainandthunder.png",
 };
+
