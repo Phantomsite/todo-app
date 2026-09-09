@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="stylesheet.css" />
-    <script src="index.js" defer></script>
+    <script type="module" src="index.js" defer></script>
     <script
       type="module"
       src="outdoor pakke/open_meteo/weather_open_meteo.js"
@@ -17,6 +17,7 @@
       defer
     ></script>
   </head>
+
   <body>
     <h1>Todo list</h1>
     <input
@@ -26,14 +27,21 @@
       placeholder="Task name"
     />
     <h3>Date</h3>
-    <select name="date" id="datePicker"></select>
-    <h3>Month</h3>
-    <select name="month" id="datePickerMonth"></select>
+    <input type="date" id="datePicker" name="date" />
     <h3>Outdoors?</h3>
     <input type="checkbox" id="outdoorCheecker" />
     <button class="create-task">Add task</button>
     <ul class="tasks"></ul>
     <h2>Finished tasks</h2>
     <ul class="tasks-complete"></ul>
+
+    <!--Weather overlay, display: none; for now-->
+    <div class="overlay">
+      <div class="overlay-content">
+        <h2>Weather data during time task is set to</h2>
+        <p id="weatherDescription">Overlay</p>
+        <button id="closeOverlay">Luk</button>
+      </div>
+    </div>
   </body>
 </html>

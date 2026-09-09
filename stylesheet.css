@@ -23,3 +23,26 @@ li {
   font-style: italic;
   color: rgb(221, 140, 140);
 }
+
+/*Overlay styling*/
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+
+  display: none;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+/* når overlayet er aktivt */
+.overlay.show {
+  display: flex;
+}

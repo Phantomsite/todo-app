@@ -3,8 +3,14 @@ const btnCreateTask = document.querySelector(".create-task");
 const taskList = document.querySelector(".tasks");
 const taskListDone = document.querySelector(".tasks-complete");
 const outdoorTask = document.getElementById("outdoorCheecker");
+const datePicked = document.getElementById("datePicker");
 const taskArray = [];
 let outdoorValue = "inside activity";
+const weatherDescription = document.getElementById("weatherDescription");
+
+//Weather overlay const
+const overlay = document.querySelector(".overlay");
+const closeOverlayBtn = document.getElementById("closeOverlay");
 
 //updates if task is outside
 outdoorTask.addEventListener("click", function () {
@@ -36,6 +42,7 @@ function createTask() {
     taskDone: false,
     id: self.crypto.randomUUID(),
     outdoor: outdoorValue,
+    date: datePicked.value,
   };
 
   //cancels function if nothing has been written in input
@@ -56,8 +63,24 @@ function renderList() {
     const li = document.createElement("li");
     li.innerHTML =
       `<input type="checkbox" ${task.taskDone ? "checked" : ""}/><p>${task.taskTxt}  </p>` +
-      `<p class="tester"> ${" \xa0(" + task.outdoor + ")"} </p>` +
+      `<p class="tester"> ${" \xa0(" + task.outdoor + ") \xa0" + "task set for " + task.date} </p>` +
       `<button class="delete-btn-styles"/> <p>${"X"} </p>`;
+
+    const testing = li.querySelector("p.tester");
+
+    //Checks if task is "outside"
+    if (task.outdoor === "outside activity") {
+      testing.classList.add("outside");
+      li.innerHTML += `<button class="weatherBtn"/> <p>${"check weather data"} </p>`;
+
+      //opens weather overlay on-click
+      li.querySelector("button.weatherBtn").addEventListener("click", () => {
+        overlay.classList.add("show");
+        weatherDescription.innerHTML = "look outside";
+      });
+    } else {
+      console.log("inside task");
+    }
 
     const deleteBtn = li.querySelector("button");
 
@@ -71,7 +94,6 @@ function renderList() {
     });
 
     const checkBox = li.querySelector('[type = "checkbox"]');
-    const testing = li.querySelector("p.tester");
 
     //updates when task is checked "done"
     checkBox.addEventListener("click", (e) => {
@@ -81,13 +103,6 @@ function renderList() {
       renderList();
       console.log(task.taskDone);
     });
-
-    //Checks if task is "outside"
-    if (task.outdoor === "outside activity") {
-      testing.classList.add("outside");
-    } else {
-      console.log("inside task");
-    }
 
     //Tasks gets sorted into "taskList" and "taskListDone"
     if (task.taskDone === true) {
@@ -102,6 +117,17 @@ function renderList() {
     outdoorValue = "inside activity";
   });
 }
+
+//Closes weather overlay
+closeOverlayBtn.addEventListener("click", function () {
+  overlay.classList.remove("show");
+});
+
+overlay.addEventListener("click", function (closing) {
+  if (event.target === overlay) {
+    overlay.classList.remove("show");
+  }
+});
 
 //Idk
 // <button class="create-task"></button>
