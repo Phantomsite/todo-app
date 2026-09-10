@@ -64,15 +64,16 @@ function createTask() {
 //each element in arrray becomes li in ul
 function renderList() {
   taskList.innerHTML = ""; // empties ul
+  taskListDone.innerHTML = "";
 
   taskArray.forEach((task) => {
     const li = document.createElement("li");
     li.innerHTML =
       `<input type="checkbox" ${task.taskDone ? "checked" : ""}/><p>${task.taskTxt}  </p>` +
-      `<p class="tester"> ${" \xa0(" + task.outdoor + ") \xa0" + "task set for " + task.date} </p>` +
+      `<p class="color"> ${" \xa0(" + task.outdoor + ") \xa0" + "task set for " + task.date} </p>` +
       `<button class="delete-btn-styles"/> <p>${"X"} </p>`;
 
-    const testing = li.querySelector("p.tester");
+    const testing = li.querySelector("p.color");
 
     //Checks if task is "outside"
     if (task.outdoor === "outside activity") {
@@ -139,4 +140,3 @@ overlay.addEventListener("click", function (closing) {
 // <button class="create-task"></button>
 // <input type="text" class="task-text" />
 // <ul class="tasks"></ul>
-
