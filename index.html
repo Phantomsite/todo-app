@@ -19,28 +19,34 @@
   </head>
 
   <body>
-    <h1>Todo list</h1>
-    <input
-      type="text"
-      class="task-text"
-      id="todoInputForm"
-      placeholder="Task name"
-    />
-    <h3>Date</h3>
-    <input type="date" id="datePicker" name="date" />
-    <h3>Outdoors?</h3>
-    <input type="checkbox" id="outdoorCheecker" />
-    <button class="create-task">Add task</button>
-    <ul class="tasks"></ul>
-    <h2>Finished tasks</h2>
-    <ul class="tasks-complete"></ul>
+    <div class="container">
+      <h1>Todo list</h1>
+      <input
+        type="text"
+        class="task-text"
+        id="todoInputForm"
+        placeholder="Task name"
+      />
+      <h3>Date</h3>
+      <input type="date" min="2026-01-01" id="datePicker" name="date" />
+      <div class="flex">
+        <h3>Outdoors?</h3>
+        <input type="checkbox" id="outdoorCheecker" />
+      </div>
 
-    <!--Weather overlay, display: none; for now-->
-    <div class="overlay">
-      <div class="overlay-content">
-        <h2>Weather data during time task is set to</h2>
-        <p id="weatherDescription">Overlay</p>
-        <button id="closeOverlay">Luk</button>
+      <button class="create-task">Add task</button>
+
+      <ul class="tasks"></ul>
+      <h2>Finished tasks</h2>
+      <ul class="tasks-complete"></ul>
+
+      <!--Weather overlay, display: none; for now-->
+      <div class="overlay">
+        <div class="overlay-content">
+          <h2>Weather data during time task is set to</h2>
+          <p id="weatherDescription">Overlay</p>
+          <button id="closeOverlay">Luk</button>
+        </div>
       </div>
     </div>
   </body>

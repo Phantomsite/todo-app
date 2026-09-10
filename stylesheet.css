@@ -6,7 +6,20 @@
 }
 
 body {
-  background-color: rgb(110, 110, 110);
+  background-color: rgb(202, 202, 202);
+}
+
+.container {
+  margin-left: 1%;
+  margin-top: 1%;
+}
+
+h2 {
+  margin-top: 1%;
+}
+
+h3 {
+  margin-top: 1%;
 }
 
 p,
@@ -15,13 +28,27 @@ input {
   font-size: 1.5rem;
 }
 
+button {
+  margin-right: 10px;
+  padding: 0 0.3em;
+}
+
 li {
   display: flex;
 }
 
 .tester {
   font-style: italic;
-  color: rgb(221, 140, 140);
+  color: rgb(53, 53, 53);
+}
+
+.flex {
+  display: flex;
+  gap: 0.5rem;
+}
+
+#outdoorCheecker {
+  width: 25px;
 }
 
 /*Overlay styling*/
@@ -42,7 +69,7 @@ li {
   border-radius: 10px;
 }
 
-/* når overlayet er aktivt */
+/* Overlay active */
 .overlay.show {
   display: flex;
 }

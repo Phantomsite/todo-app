@@ -45,6 +45,12 @@ function createTask() {
     date: datePicked.value,
   };
 
+  console.log(taskObj.date);
+
+  if (taskObj.date === "") {
+    taskObj.date = "today";
+  }
+
   //cancels function if nothing has been written in input
   if (taskInput.value === "") {
     alert("You must write something");
