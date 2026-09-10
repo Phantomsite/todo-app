@@ -76,7 +76,7 @@ function renderList() {
       //opens weather overlay on-click
       li.querySelector("button.weatherBtn").addEventListener("click", () => {
         overlay.classList.add("show");
-        weatherDescription.innerHTML = "look outside";
+        weatherDescription.innerHTML = "Look outside";
       });
     } else {
       console.log("inside task");
